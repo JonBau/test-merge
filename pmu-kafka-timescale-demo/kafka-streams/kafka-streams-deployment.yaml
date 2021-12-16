@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-kstreams
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-kstreams
+  template:
+    metadata:
+      labels:
+        app: demo-kstreams
+    spec:
+      containers:
+        - name: demo-kstreams
+          image: registry.git-ce.rwth-aachen.de/acs/private/research/platone/wp2/pmu-streams-connector:latest
+          env:
+            - name: KAFKA_BROKER
+              value: demo-cluster-kafka-bootstrap:9092
+            - name: INPUT_TOPIC
+              value: pmu-dummy-in
+            - name: OUTPUT_TOPIC
+              value: pmu-dummy-out
+            - name: APP_ID
+              value: pmu-dummy-app
+      imagePullSecrets:
+        - name: regcred

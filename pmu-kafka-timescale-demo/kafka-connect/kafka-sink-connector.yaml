@@ -1,0 +1,15 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaConnector
+metadata:
+  name: demo-sink-connector
+  labels:
+    strimzi.io/cluster: demo-kafka-connect-cluster
+spec:
+  class: io.confluent.connect.jdbc.JdbcSinkConnector
+  tasksMax: 1
+  config:
+    topics: pmu-dummy-out
+    connection.url: jdbc:postgresql://demo-timescaledb-cluster.dsotp.svc.cluster.local:5432/kafka
+    connection.user: kafka
+    connection.password: kafka
+    auto.create: true

@@ -1,0 +1,28 @@
+ingress:
+  enabled: true
+  hosts:
+    - "ubuntu-jbu-k3s.acs-lab.eonerc.rwth-aachen.de"
+  path: /
+
+datasources: 
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+    - name: PostgreSQL
+      type: postgres
+      url: demo-timescaledb.dsotp:5432
+      access: proxy
+      isDefault: true
+      user: kafka
+      database: kafka
+      secureJsonData:
+        password: kafka
+      jsonData:
+        sslmode: require
+        tlsConfigurationMethod: file-path
+        timescaledb: true
+
+sidecar:
+  dashboards:
+    enabled: true
+    label: demo_grafana_dashboard
