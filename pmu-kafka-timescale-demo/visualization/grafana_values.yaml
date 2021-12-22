@@ -10,7 +10,7 @@ datasources:
     datasources:
     - name: PostgreSQL
       type: postgres
-      url: timescaledb.demo:5432
+      url: timescaledb-cluster.demo:5432
       access: proxy
       isDefault: true
       user: kafka

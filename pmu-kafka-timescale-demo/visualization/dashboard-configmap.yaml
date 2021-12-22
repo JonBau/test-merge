@@ -28,14 +28,11 @@ data:
       },
       "editable": true,
       "fiscalYearStartMonth": 0,
-      "gnetId": null,
       "graphTooltip": 0,
-      "id": 3,
       "links": [],
       "liveNow": false,
       "panels": [
         {
-          "datasource": "PostgreSQL",
           "fieldConfig": {
             "defaults": {
               "color": {
@@ -92,7 +89,7 @@ data:
                   "options": {
                     "mode": "exclude",
                     "names": [
-                      "Phase B"
+                      "Phase A"
                     ],
                     "prefix": "All except:",
                     "readOnly": true
@@ -130,11 +127,16 @@ data:
           },
           "targets": [
             {
+              "datasource": {
+                "type": "postgres",
+                "uid": "PCC52D03280B7034C"
+              },
               "format": "time_series",
               "group": [],
+              "hide": false,
               "metricColumn": "none",
               "rawQuery": false,
-              "rawSql": "SELECT\n  \"timestamp\" AS \"time\",\n  data AS \"Phase A\"\nFROM pmu-dummy-out\nORDER BY 1",
+              "rawSql": "SELECT\n  \"timestamp\" AS \"time\",\n  data AS \"Phase A\"\nFROM \"pmu-dummy-out\"\nWHERE\n  $__unixEpochFilter(\"timestamp\") AND\n  phase = 'A'\nORDER BY 1",
               "refId": "A",
               "select": [
                 [
@@ -152,18 +154,38 @@ data:
                   }
                 ]
               ],
-              "table": "pmu-dummy-out",
+              "table": "\"pmu-dummy-out\"",
               "timeColumn": "\"timestamp\"",
               "timeColumnType": "int8",
-              "where": []
+              "where": [
+                {
+                  "name": "$__unixEpochFilter",
+                  "params": [],
+                  "type": "macro"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "phase",
+                    "=",
+                    "'A'"
+                  ],
+                  "type": "expression"
+                }
+              ]
             },
             {
+              "datasource": {
+                "type": "postgres",
+                "uid": "PCC52D03280B7034C"
+              },
               "format": "time_series",
               "group": [],
               "hide": false,
               "metricColumn": "none",
               "rawQuery": false,
-              "rawSql": "SELECT\n  \"timestamp\" AS \"time\",\n  data AS \"Phase B\"\nFROM pmu-dummy-out\nORDER BY 1",
+              "rawSql": "SELECT\n  \"timestamp\" AS \"time\",\n  data AS \"Phase B\"\nFROM \"pmu-dummy-out\"\nWHERE\n  $__unixEpochFilter(\"timestamp\") AND\n  phase = 'B'\nORDER BY 1",
               "refId": "B",
               "select": [
                 [
@@ -181,18 +203,38 @@ data:
                   }
                 ]
               ],
-              "table": "pmu-dummy-out",
+              "table": "\"pmu-dummy-out\"",
               "timeColumn": "\"timestamp\"",
               "timeColumnType": "int8",
-              "where": []
+              "where": [
+                {
+                  "name": "$__unixEpochFilter",
+                  "params": [],
+                  "type": "macro"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "phase",
+                    "=",
+                    "'B'"
+                  ],
+                  "type": "expression"
+                }
+              ]
             },
             {
+              "datasource": {
+                "type": "postgres",
+                "uid": "PCC52D03280B7034C"
+              },
               "format": "time_series",
               "group": [],
               "hide": false,
               "metricColumn": "none",
               "rawQuery": false,
-              "rawSql": "SELECT\n  \"timestamp\" AS \"time\",\n  data AS \"Phase C\"\nFROM pmu-dummy-out\nORDER BY 1",
+              "rawSql": "SELECT\n  \"timestamp\" AS \"time\",\n  data AS \"Phase C\"\nFROM \"pmu-dummy-out\"\nWHERE\n  $__unixEpochFilter(\"timestamp\") AND\n  phase = 'C'\nORDER BY 1",
               "refId": "C",
               "select": [
                 [
@@ -210,10 +252,26 @@ data:
                   }
                 ]
               ],
-              "table": "pmu-dummy-out",
+              "table": "\"pmu-dummy-out\"",
               "timeColumn": "\"timestamp\"",
               "timeColumnType": "int8",
-              "where": []
+              "where": [
+                {
+                  "name": "$__unixEpochFilter",
+                  "params": [],
+                  "type": "macro"
+                },
+                {
+                  "datatype": "text",
+                  "name": "",
+                  "params": [
+                    "phase",
+                    "=",
+                    "'C'"
+                  ],
+                  "type": "expression"
+                }
+              ]
             }
           ],
           "title": "Kafka - Timescale",
@@ -221,19 +279,20 @@ data:
         }
       ],
       "refresh": "",
-      "schemaVersion": 31,
+      "schemaVersion": 34,
       "style": "dark",
       "tags": [],
       "templating": {
         "list": []
       },
       "time": {
-        "from": "now-6h",
+        "from": "now-1h",
         "to": "now"
       },
       "timepicker": {},
       "timezone": "",
       "title": "Kafka - Timescale",
       "uid": "NLINDUF7k",
-      "version": 14
+      "version": 1,
+      "weekStart": ""
     }
