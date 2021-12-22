@@ -1,10 +1,6 @@
 replicaCount: 1
-nameOverride: demo-timescaledb
-clusterName: demo-timescaledb-cluster
-
-secretNames:
-  credentials: demo-timescaledb-cluster-credentials
-  certificate: demo-timescaledb-cluster-certs
+nameOverride: timescaledb
+clusterName: timescaledb-cluster
 
 loadBalancer:
   enabled: true

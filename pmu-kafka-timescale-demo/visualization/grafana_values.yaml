@@ -10,7 +10,7 @@ datasources:
     datasources:
     - name: PostgreSQL
       type: postgres
-      url: demo-timescaledb.dsotp:5432
+      url: timescaledb.demo:5432
       access: proxy
       isDefault: true
       user: kafka
@@ -25,4 +25,4 @@ datasources:
 sidecar:
   dashboards:
     enabled: true
-    label: demo_grafana_dashboard
+    label: grafana_dashboard

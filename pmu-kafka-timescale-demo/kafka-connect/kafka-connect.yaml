@@ -1,17 +1,17 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaConnect
 metadata:
-  name: demo-kafka-connect-cluster
+  name: kafka-connect-cluster
   annotations:
     strimzi.io/use-connector-resources: "true"
 spec:
   replicas: 1
-  bootstrapServers: demo-cluster-kafka-bootstrap:9092
+  bootstrapServers: strimzi-cluster-kafka-bootstrap.demo:9092
   config:
-    group.id: demo-kafka-connect-cluster
-    offset.storage.topic: demo-kafka-connect-cluster-offsets
-    config.storage.topic: demo-kafka-connect-cluster-configs
-    status.storage.topic: demo-kafka-connect-cluster-status
+    group.id: kafka-connect-cluster
+    offset.storage.topic: kafka-connect-cluster-offsets
+    config.storage.topic: kafka-connect-cluster-configs
+    status.storage.topic: kafka-connect-cluster-status
     key.converter: org.apache.kafka.connect.json.JsonConverter
     value.converter: org.apache.kafka.connect.json.JsonConverter
     key.converter.schemas.enable: true
@@ -23,13 +23,13 @@ spec:
     config.providers.file.class: org.apache.kafka.common.config.provider.FileConfigProvider
   externalConfiguration:
     volumes:
-      - name: demo-timescaledb-cluster-credentials
+      - name: timescaledb-cluster-credentials
         secret:
-          secretName: demo-timescaledb-cluster-credentials
+          secretName: timescaledb-cluster-credentials
   build:
     output:
       type: docker
-      image: registry.git-ce.rwth-aachen.de/acs/private/research/platone/wp2/example-deployments/pmu-kafka-timescale-demo/demo-kafka-connect-cluster
+      image: registry.git-ce.rwth-aachen.de/acs/private/research/platone/wp2/example-deployments/pmu-kafka-timescale-demo/kafka-connect-cluster
       pushSecret: regcred
     plugins:
       - name: confluent-postgres-connector
