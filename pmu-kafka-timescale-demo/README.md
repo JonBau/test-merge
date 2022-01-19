@@ -55,7 +55,7 @@ $ helm install timescaledb-cluster timescaledb/timescaledb-single -n demo -f tim
 
 Directly execute a psql session on the master node
 ```bash
-$ MASTERPOD="$(kubectl get pod -o name --namespace demo -l release=timescaledb-cluster,role=master)" 
+$ MASTERPOD="$(kubectl get pod -o name --namespace demo -l release=timescaledb-cluster)" 
 $ kubectl exec -i --tty --namespace demo ${MASTERPOD} -- psql -U postgres
 ```
 
