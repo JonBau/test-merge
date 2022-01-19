@@ -50,7 +50,12 @@ $ helm repo add timescaledb 'https://raw.githubusercontent.com/timescale/timesca
 
 Install helm chart
 ```bash
-$ helm install timescaledb-cluster timescaledb/timescaledb-single -n demo -f timescaledb/timescaledb-values.yaml
+$ helm repo add timescaledb 'https://raw.githubusercontent.com/timescale/timescaledb-kubernetes/master/charts/repo/'
+$ openssl req -x509 -sha256 -nodes -newkey rsa:4096 -days 3650 -subj "/CN=*.timescaledb.svc.cluster.local" -keyout tls.key -out tls.crt
+$ kubectl create secret generic -n demo timescaledb-cluster-certificate --from-file=tls.crt=tls.crt --from-file=tls.key=tls.key
+$ rm tls.crt tls.key
+$ kubectl apply -f timescaledb/timescaledb-credentials-secret.yaml -n demo
+$ helm install timescaledb-cluster timescaledb/timescaledb-single -n demo -f timescaledb-values.yaml
 ```
 
 Directly execute a psql session on the master node

@@ -1,7 +1,7 @@
 ingress:
   enabled: true
   hosts:
-    - "ubuntu-jbu-k3s.acs-lab.eonerc.rwth-aachen.de"
+    - "ubuntu-jbu-3.acs-lab.eonerc.rwth-aachen.de"
   path: /
 
 datasources: 
