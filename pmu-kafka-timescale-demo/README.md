@@ -79,6 +79,11 @@ $ kubectl apply -f kafka-connect/kafka-sink-connector.yaml -n demo
 ```
 
 ### PMU Simulation
+Modify the template at `pmu-dummy/template-configmap.yaml` if necessary and apply the configmap manifest
+```bash
+$ kubectl apply -f pmu-dummy/template-configmap.yaml -n demo
+```
+
 Modify the environment variables at `pmu-dummy/deployment.yaml` and apply the deployment manifest
 ```bash
 $ kubectl apply -f pmu-dummy/deployment.yaml -n demo
