@@ -10,3 +10,4 @@ More examples to come soon!
 
 - [PMU Data Visualization](pmu-data-visualization)
 - [Pyvolt DPsim Demo](pyvolt-dpsim-demo)
+- [PMU Data Visualization (Kafka & Timescale)](pmu-kafka-timescale-demo)
